@@ -42,7 +42,7 @@ import { useSongStore } from '../../stores/songStore.js';
 import { storeToRefs } from 'pinia';
 
 const noSuchId = defineAsyncComponent(() =>
-    import('../../components/global/noSuchId.vue')
+    import('../../components/global/NoSuchId.vue')
 )
 
 const { id } = defineProps({

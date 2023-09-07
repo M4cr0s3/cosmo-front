@@ -8,7 +8,7 @@ import ULoading from '../../components/global/Loading.vue';
 
 
 const noSuchId = defineAsyncComponent(() =>
-    import('../../components/global/noSuchId.vue')
+    import('../../components/global/NoSuchId.vue')
 )
 
 const { id } = defineProps({

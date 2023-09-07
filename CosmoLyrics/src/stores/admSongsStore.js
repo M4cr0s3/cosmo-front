@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import axios from "axios";
+import {APIUrl} from "@/APIUrl";
 
 export const useAdmSongsStore = defineStore('songs', {
     state: () => ({
@@ -16,7 +17,7 @@ export const useAdmSongsStore = defineStore('songs', {
         async getSongs(page = 1) {
             if (page === this.current_page) return
             try {
-                const resp = await axios.get(`/api/get_songs_to_stats?page=${page}`)
+                const resp = await axios.get(`${APIUrl}/api/get_songs_to_stats?page=${page}`)
                 this.songs = resp.data.all_songs.data
                 this.current_page = resp.data.all_songs.current_page
                 this.last_page = resp.data.all_songs.last_page

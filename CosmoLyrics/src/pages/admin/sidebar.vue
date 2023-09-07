@@ -29,13 +29,13 @@
          <li>
             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <Icon icon="prime:sign-in" height="27px" width="27px"/>
-               <span class="flex-1 ml-3 whitespace-nowrap">Войти</span>
+               <RouterLink to="/login"><span class="flex-1 ml-3 whitespace-nowrap">Войти</span></RouterLink>
             </a>
          </li>
          <li>
             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <Icon icon="solar:square-arrow-right-up-line-duotone" height="27px" width="27px"/>
-               <span class="flex-1 ml-3 whitespace-nowrap">Зарегистрироваться</span>
+               <RouterLink to="/registration"><span class="flex-1 ml-3 whitespace-nowrap">Зарегистрироваться</span></RouterLink>
             </a>
          </li>
       </ul>

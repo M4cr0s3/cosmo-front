@@ -9,6 +9,7 @@ import adminPage from '../pages/admin/adminPage.vue'
 import musicStat from '../pages/admin/musicStatistics/musicStat.vue'
 import albumStat from '../pages/admin/albumStatistics/albumStat.vue'
 import userStat from '../pages/admin/userStatistics/userStat.vue'
+import Registration from "@/pages/registration/Registration.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -87,6 +88,14 @@ const router = createRouter({
             component: userStat,
             meta: {
                 title: 'Статистика по пользователям'
+            }
+        },
+        {
+            name: 'Registration',
+            path: '/registration',
+            component: Registration,
+            meta: {
+                title: 'Регистрация'
             }
         },
         {

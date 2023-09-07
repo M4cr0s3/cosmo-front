@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {defineStore} from "pinia";
+import {APIUrl} from "@/APIUrl";
 
 export const useMusicStatStore = defineStore('music', {
     state: () => ({
@@ -12,7 +13,7 @@ export const useMusicStatStore = defineStore('music', {
     actions: {
         async getStats() {
             try {
-                let response = await axios.get('/api/get_music_stats')
+                let response = await axios.get(`${APIUrl}/api/get_music_stats`)
                 this.singer_count = response?.data?.singer_count
                 this.song_count = response?.data?.song_count
                 this.total_watches = response?.data?.total_watches

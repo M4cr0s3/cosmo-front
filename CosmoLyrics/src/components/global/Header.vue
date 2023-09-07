@@ -45,7 +45,7 @@ import { RouterLink } from 'vue-router';
                         <a href="#about_us" class="link text-emerald-300">О нас</a>
                     </li>
                     <li class="">
-                        <a href="#" class="link">Вход</a>
+                        <RouterLink to="/login" class="link">Вход</RouterLink>
                     </li>
                     <li class="">
                         <a href="#" class="link">Контакты</a>

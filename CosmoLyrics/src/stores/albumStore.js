@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import {APIUrl} from "@/APIUrl";
 
 export const useAlbumStore = defineStore('album', {
     state: () => ({
@@ -11,7 +12,7 @@ export const useAlbumStore = defineStore('album', {
         async getAlbum(id) {
             try {
                 this.loading = true
-                let resp = await axios.get('/api/get_album/' + id)
+                let resp = await axios.get(`${APIUrl}/api/get_album/${id}`)
                 this.album = resp?.data?.album
                 console.log(this.album.songs)
             } catch (e) {

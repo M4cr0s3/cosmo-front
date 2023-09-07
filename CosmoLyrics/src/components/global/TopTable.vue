@@ -22,7 +22,7 @@ const showSong = (id) => {
   router.push('/songs/' + id)
 }
 
-const errorComp = defineAsyncComponent(() => import('./error.vue'))
+const errorComp = defineAsyncComponent(() => import('./Error.vue'))
 
 </script>
 
