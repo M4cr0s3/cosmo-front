@@ -5,6 +5,7 @@ export const useIsAcceptedStore = defineStore('Accept', () => {
     const isAccepted = ref(false)
 
     const acceptTerms = () => {
+        console.log(isAccepted.value)
         return isAccepted.value = true
     }
 
