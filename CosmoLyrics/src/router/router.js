@@ -99,6 +99,14 @@ const router = createRouter({
             }
         },
         {
+          name: 'Login',
+          path: '/login',
+          component: () => import('../pages/login/Login.vue'),
+          meta: {
+              title: 'Авторизация'
+          }
+        },
+        {
             name: '404',
             path: '/:pathMatch(.*)*',
             component: Error404,

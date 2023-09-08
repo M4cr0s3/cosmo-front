@@ -14,13 +14,13 @@ const { isAccepted } = storeToRefs(acceptedStore)
 const { acceptTerms, denyTerms } = acceptedStore
 
 const handleAccept = () => {
-  closeModal()
   acceptTerms()
+  closeModal()
 }
 
 const handleDeny = () => {
-  closeModal()
   denyTerms()
+  closeModal()
 }
 
 </script>
