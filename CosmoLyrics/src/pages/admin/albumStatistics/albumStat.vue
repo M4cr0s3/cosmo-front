@@ -1,10 +1,11 @@
 <script setup>
+import AdminLayout from "@/components/Layouts/adminLayout.vue";
 </script>
 
 <template>
-    <div>
-        eqwewq
-    </div>
+    <AdminLayout>
+
+    </AdminLayout>
 </template>
 
 <style scoped>

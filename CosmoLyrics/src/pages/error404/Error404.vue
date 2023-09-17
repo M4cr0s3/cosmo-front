@@ -1,17 +1,23 @@
 <template>
-
-
   <BaseLayout>
     <div class="error404 container flex mx-auto max-lg:flex-wrap max-lg:flex-col">
       <div class="flex flex-col max-lg:w-[100%] w-[50%] justify-center max-lg:items-center">
         <h1 class="text-8xl text-gray-50 font-bold">Упс...</h1>
         <div class="flex items-center">
           <h4 class="text-2xl text-gray-50 mt-1 mr-[10px]">Такой страницы на нашем сайте нет :(</h4>
-          <Icon icon="material-symbols:do-not-touch-rounded" color="#fff" height="30px" width="30px"></Icon>
+          <Icon
+            icon="material-symbols:do-not-touch-rounded"
+            color="#fff"
+            height="30px"
+            width="30px"
+          ></Icon>
         </div>
 
-        <RouterLink to="/" class="text-xl text-gray-50 mt-2 underline dark:hover:text-violet-400 font-bold">Выход есть —
-          перейдите на главную страницу.
+        <RouterLink
+          to="/"
+          class="text-xl text-gray-50 mt-2 underline dark:hover:text-violet-400 font-bold"
+        >
+          Выход есть — перейдите на главную страницу.
         </RouterLink>
       </div>
       <div class="max-lg:w-[100%] w-[50%] justify-center items-center flex">
@@ -19,29 +25,31 @@
       </div>
     </div>
   </BaseLayout>
-
-
 </template>
 
 <script setup>
-import {Icon} from '@iconify/vue'
-import BaseLayout from "@/components/Layouts/baseLayout.vue";
+import { Icon } from '@iconify/vue'
+import BaseLayout from '@/components/Layouts/baseLayout.vue'
 </script>
 <style scoped>
 .gradient {
   min-height: 100vh;
 }
+
 #app {
   display: flex;
   flex-direction: column;
 }
+
 .header {
   flex-grow: 0;
 }
+
 .error404 {
   flex-grow: 1;
   min-height: 85vh;
 }
+
 .footer {
   flex-grow: 0;
 }
