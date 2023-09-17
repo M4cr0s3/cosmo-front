@@ -9,6 +9,9 @@ import { useIsAcceptedStore } from '@/stores/isAcceptedStore'
 import { storeToRefs } from 'pinia'
 import useVuelidate from '@vuelidate/core'
 import { minLength, email, helpers, maxLength, sameAs } from '@vuelidate/validators'
+import axios from "axios";
+import {APIUrl} from "@/APIUrl";
+import { useRegisterStore } from "@/stores/register";
 
 const modalStore = useModalStore()
 const { showModal } = storeToRefs(modalStore)
@@ -33,8 +36,8 @@ const rules = computed(() => ({
     email: helpers.withMessage('Данное поле должно содержать Ваш адрес электронной почты.', email)
   },
   name: {
-    minLength: helpers.withMessage('Минимальная длина имени 3 символа', minLength(3)),
-    maxLength: helpers.withMessage('Максимальная длина имени 20 символов', maxLength(20))
+    minLength: helpers.withMessage('Минимальная длина имени 3 символа.', minLength(3)),
+    maxLength: helpers.withMessage('Максимальная длина имени 20 символов.', maxLength(20))
   },
   username: {
     minLength: helpers.withMessage('Минимальная длина юзернейма 4 символа.', minLength(4)),
@@ -49,19 +52,31 @@ const rules = computed(() => ({
   }
 }))
 
-const v = useVuelidate(rules, formData)
+const v$ = useVuelidate(rules, formData)
+
+const registerStore = useRegisterStore()
+
+const register = () => {
+  v$.value.$touch()
+  if (v$.value.$error) return
+  registerStore.email = formData.email
+  registerStore.name = formData.name
+  registerStore.password = formData.password
+  registerStore.password_confirmation = formData.confirmed_password
+  registerStore.register()
+}
 </script>
 
 <template>
-  <form @submit.prevent="" class="space-y-4 md:space-y-6">
+  <form @submit.prevent="register()" class="space-y-4 md:space-y-6">
     <div class="mb-2">
       <FormInput
         type="email"
         placeholder="Ваш email"
         required="required"
         label="Email"
-        :error="v.email.$errors"
-        v-model:value="v.email.$model"
+        :error="v$.email.$errors"
+        v-model:value="v$.email.$model"
       >
       </FormInput>
     </div>
@@ -71,8 +86,8 @@ const v = useVuelidate(rules, formData)
         placeholder="Ваше имя"
         required="required"
         label="Имя"
-        :error="v.name.$errors"
-        v-model:value="v.name.$model"
+        :error="v$.name.$errors"
+        v-model:value="v$.name.$model"
       />
     </div>
     <div class="mb-2">
@@ -81,8 +96,8 @@ const v = useVuelidate(rules, formData)
         placeholder="Например, Macrose"
         required="required"
         label="Имя пользователя"
-        :error="v.username.$errors"
-        v-model:value="v.username.$model"
+        :error="v$.username.$errors"
+        v-model:value="v$.username.$model"
       />
     </div>
     <div class="mb-2">
@@ -91,8 +106,8 @@ const v = useVuelidate(rules, formData)
         placeholder="••••••••"
         required="required"
         label="Пароль"
-        :error="v.password.$errors"
-        v-model:value="v.password.$model"
+        :error="v$.password.$errors"
+        v-model:value="v$.password.$model"
       />
     </div>
     <div class="mb-2">
@@ -101,8 +116,8 @@ const v = useVuelidate(rules, formData)
         placeholder="••••••••"
         required="required"
         label="Повтор пароля"
-        :error="v.confirmed_password.$errors"
-        v-model:value="v.confirmed_password.$model"
+        :error="v$.confirmed_password.$errors"
+        v-model:value="v$.confirmed_password.$model"
       />
     </div>
     <CheckboxForm> Условия и положения</CheckboxForm>

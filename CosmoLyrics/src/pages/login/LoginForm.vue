@@ -4,24 +4,32 @@ import {reactive} from "vue";
 import FormInput from "@/components/formComponents/FormInput.vue";
 import FormButton from "@/components/formComponents/FormButton.vue";
 import AlreadyLink from "@/components/formComponents/AlreadyLink.vue";
+import { useAuthStore } from "@/stores/auth";
 
 const formData = reactive({
   email: '',
   password: ''
 })
 
+const authStore = useAuthStore()
+
+const login = () => {
+  authStore.email = formData.email
+  authStore.password = formData.password
+  authStore.auth()
+}
 
 </script>
 
 <template>
-  <form @submit.prevent="" class="space-y-4 md:space-y-6">
+  <form @submit.prevent="login()" class="space-y-4 md:space-y-6">
     <div class="mb-2">
       <FormInput
           type="email"
           placeholder="Ваш email"
           required="required"
           label="Email"
-          v-model="formData.email"
+          v-model:value="formData.email"
       >
       </FormInput>
     </div>
@@ -31,7 +39,7 @@ const formData = reactive({
           placeholder="••••••••"
           required="required"
           label="Пароль"
-          v-model="formData.password"
+          v-model:value="formData.password"
       />
     </div>
     <FormButton>

@@ -1,34 +1,33 @@
-import {defineStore} from "pinia";
-import axios from "axios";
-import {APIUrl} from "@/APIUrl";
+import { defineStore } from 'pinia'
+import axios from 'axios'
+import { APIUrl } from '@/APIUrl'
+import { ref } from 'vue'
 
-export const useAdmSongsStore = defineStore('songs', {
-    state: () => ({
-        songs: null,
-        current_page: null,
-        last_page: null,
-        last_page_url: null,
-        links: null,
-        next_page_url: null,
-        prev_page_url: null,
-        to: null,
-    }),
-    actions: {
-        async getSongs(page = 1) {
-            if (page === this.current_page) return
-            try {
-                const resp = await axios.get(`${APIUrl}/api/get_songs_to_stats?page=${page}`)
-                this.songs = resp.data.all_songs.data
-                this.current_page = resp.data.all_songs.current_page
-                this.last_page = resp.data.all_songs.last_page
-                this.last_page_url = resp.data.all_songs.last_page_url
-                this.links = resp.data.all_songs.links
-                this.next_page_url = resp.data.all_songs.next_page_url
-                this.prev_page_url = resp.data.all_songs.prev_page_url
-                this.to = resp.data.all_songs.to
-            } catch (err) {
-                this.error = err.message
-            }
-        },
+export const useAdmSongsStore = defineStore('songs', () => {
+  const songs = ref([])
+  const current_page = ref()
+  const last_page = ref()
+  const links = ref()
+  const to = ref()
+  const error = ref()
+  const loading = ref(false)
+
+  const getSongs = async (page = 1) => {
+    if (page === current_page.value) return
+    try {
+      loading.value = true
+      const resp = await axios.get(`${APIUrl}/api/get_songs_to_stats?page=${page}`)
+      songs.value = resp.data.data
+      current_page.value = resp.data.meta.current_page
+      last_page.value = resp.data.meta.last_page
+      links.value = resp.data.meta.links
+      to.value = resp.data.meta.to
+    } catch (err) {
+      error.value = err.message
+    } finally {
+      loading.value = false
     }
+  }
+
+  return {songs, current_page, last_page, links, to, error, getSongs}
 })
